@@ -21,8 +21,8 @@ const StoryGallery = ({ stories }) => {
   const categories = ['All', ...new Set(allStories.map(story => story.category))];
 
   const filteredStories = allStories.filter(story => {
-    const matchesSearch = story.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         story.content.toLowerCase().includes(searchTerm.toLowerCase());
+    const searchContent = story.title + ' ' + (story.introduction || story.content || '') + ' ' + (story.middle || '') + ' ' + (story.conclusion || '');
+    const matchesSearch = searchContent.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === 'All' || story.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
