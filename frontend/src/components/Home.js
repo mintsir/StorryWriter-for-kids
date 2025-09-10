@@ -44,7 +44,7 @@ const Home = ({ progress }) => {
           how to create stories with a strong beginning, exciting middle, and satisfying ending.
         </p>
         
-        {!progress.lessonCompleted ? (
+        {!progress.lesson_completed ? (
           <Link to="/lesson">
             <Button size="lg" className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 text-lg">
               Start Learning <GraduationCap className="ml-2 h-5 w-5" />
