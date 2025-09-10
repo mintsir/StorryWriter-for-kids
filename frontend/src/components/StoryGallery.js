@@ -201,7 +201,7 @@ const StoryGallery = ({ stories }) => {
                 <div className="flex items-center justify-between text-xs text-gray-500 mb-3">
                   <div className="flex items-center space-x-1">
                     <Calendar className="h-3 w-3" />
-                    <span>{formatDate(story.dateCompleted)}</span>
+                    <span>{formatDate(story.date_completed || story.dateCompleted)}</span>
                   </div>
                   <div className="flex items-center space-x-1">
                     <FileText className="h-3 w-3" />
