@@ -3,8 +3,9 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Input } from './ui/input';
-import { savedStories } from './mock';
-import { BookOpen, Calendar, FileText, Search, Heart, Sparkles } from 'lucide-react';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
+import { completedStories } from './mock';
+import { BookOpen, Calendar, FileText, Search, Heart, Sparkles, Eye, PlayCircle, Zap, CheckCircle } from 'lucide-react';
 
 const StoryGallery = ({ stories }) => {
   const [allStories, setAllStories] = useState([]);
