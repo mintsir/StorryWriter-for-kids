@@ -24,25 +24,26 @@ const stepColors = {
 
 const stepNames = ['Introduction', 'Main Story', 'Conclusion'];
 
-const GuidedWriter = ({ progress, onProgressUpdate }) => {
+const GuidedWriter = ({ progress, onStoryCreate }) => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [currentStep, setCurrentStep] = useState(0);
   const [storyTitle, setStoryTitle] = useState('');
   const [storyParts, setStoryParts] = useState(['', '', '']);
   const [showHints, setShowHints] = useState({});
   const [currentHint, setCurrentHint] = useState(0);
+  const [saving, setSaving] = useState(false);
   const { toast } = useToast();
 
   // Redirect if lesson not completed
   useEffect(() => {
-    if (!progress.lessonCompleted) {
+    if (!progress.lesson_completed) {
       toast({
         title: "Complete the lesson first!",
         description: "Learn about story structure before you start writing.",
         variant: "destructive"
       });
     }
-  }, [progress.lessonCompleted, toast]);
+  }, [progress.lesson_completed, toast]);
 
   const currentStepIcon = stepIcons[currentStep];
   const currentStepColor = stepColors[currentStep];
