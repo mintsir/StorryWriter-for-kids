@@ -185,6 +185,9 @@ const StoryGallery = ({ stories }) => {
                       <Badge className={getCategoryColor(story.category)}>
                         {story.category}
                       </Badge>
+                      {story.studentName && (
+                        <span className="text-xs text-gray-500">{story.studentName}</span>
+                      )}
                     </div>
                   </div>
                   <Sparkles className="h-5 w-5 text-yellow-500 flex-shrink-0" />
@@ -192,18 +195,35 @@ const StoryGallery = ({ stories }) => {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 text-sm line-clamp-4 mb-4">
-                  {story.content}
+                  {getStoryPreview(story)}
                 </p>
-                <div className="flex items-center justify-between text-xs text-gray-500">
+                <div className="flex items-center justify-between text-xs text-gray-500 mb-3">
                   <div className="flex items-center space-x-1">
                     <Calendar className="h-3 w-3" />
-                    <span>{formatDate(story.dateCreated)}</span>
+                    <span>{formatDate(story.dateCompleted)}</span>
                   </div>
                   <div className="flex items-center space-x-1">
                     <FileText className="h-3 w-3" />
-                    <span>{story.wordCount} words</span>
+                    <span>{getWordCount(story)} words</span>
                   </div>
                 </div>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button className="w-full" size="sm" onClick={() => setSelectedStory(story)}>
+                      <Eye className="h-4 w-4 mr-2" />
+                      Read Full Story
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle>Full Story</DialogTitle>
+                      <DialogDescription>
+                        A complete story with proper structure
+                      </DialogDescription>
+                    </DialogHeader>
+                    {renderFullStory(story)}
+                  </DialogContent>
+                </Dialog>
               </CardContent>
             </Card>
           ))}
