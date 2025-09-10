@@ -11,10 +11,11 @@ const StoryGallery = ({ stories }) => {
   const [allStories, setAllStories] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedStory, setSelectedStory] = useState(null);
 
   useEffect(() => {
-    // Combine saved mock stories with new stories from props
-    setAllStories([...savedStories, ...stories]);
+    // Combine completed mock stories with new stories from props
+    setAllStories([...completedStories, ...(stories || [])]);
   }, [stories]);
 
   const categories = ['All', ...new Set(allStories.map(story => story.category))];
