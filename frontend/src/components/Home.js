@@ -90,10 +90,10 @@ const Home = ({ progress }) => {
             </CardContent>
           </Card>
 
-          <Card className={`border-2 ${progress.lessonCompleted ? 'border-indigo-300' : 'border-gray-200 opacity-75'}`}>
+          <Card className={`border-2 ${progress.lesson_completed ? 'border-indigo-300' : 'border-gray-200 opacity-75'}`}>
             <CardHeader className="text-center">
               <div className="flex justify-center mb-2">
-                <Sparkles className={`h-12 w-12 ${progress.lessonCompleted ? 'text-indigo-600' : 'text-gray-400'}`} />
+                <Sparkles className={`h-12 w-12 ${progress.lesson_completed ? 'text-indigo-600' : 'text-gray-400'}`} />
               </div>
               <CardTitle className="text-xl">2. Practice Writing</CardTitle>
               <CardDescription>
