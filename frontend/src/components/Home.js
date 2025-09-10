@@ -81,10 +81,10 @@ const Home = ({ progress }) => {
             <CardContent>
               <Link to="/lesson">
                 <Button 
-                  className={`w-full ${progress.lessonCompleted ? 'bg-green-600 hover:bg-green-700' : ''}`}
-                  variant={progress.lessonCompleted ? 'default' : 'outline'}
+                  className={`w-full ${progress.lesson_completed ? 'bg-green-600 hover:bg-green-700' : ''}`}
+                  variant={progress.lesson_completed ? 'default' : 'outline'}
                 >
-                  {progress.lessonCompleted ? 'Review Lesson' : 'Start Lesson'}
+                  {progress.lesson_completed ? 'Review Lesson' : 'Start Lesson'}
                 </Button>
               </Link>
             </CardContent>
