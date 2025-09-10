@@ -71,7 +71,7 @@ const StoryGallery = ({ stories }) => {
         <div className="flex items-center justify-center space-x-4 text-sm text-gray-500">
           <Badge className={getCategoryColor(story.category)}>{story.category}</Badge>
           <span>By {story.studentName || 'Young Author'}</span>
-          <span>{formatDate(story.dateCompleted)}</span>
+          <span>{formatDate(story.date_completed || story.dateCompleted)}</span>
         </div>
       </div>
 
