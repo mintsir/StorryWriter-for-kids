@@ -2,16 +2,21 @@ import React, { useState } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
-import StoryWriter from "./components/StoryWriter";
+import StoryLesson from "./components/StoryLesson";
+import GuidedWriter from "./components/GuidedWriter";
 import StoryGallery from "./components/StoryGallery";
 import Navigation from "./components/Navigation";
 import { Toaster } from "./components/ui/toaster";
 
 function App() {
-  const [stories, setStories] = useState([]);
+  const [userProgress, setUserProgress] = useState({
+    lessonCompleted: false,
+    currentStory: null,
+    completedStories: []
+  });
   
-  const addStory = (story) => {
-    setStories(prev => [...prev, { ...story, id: Date.now() }]);
+  const updateProgress = (progress) => {
+    setUserProgress(prev => ({ ...prev, ...progress }));
   };
 
   return (
@@ -19,9 +24,10 @@ function App() {
       <BrowserRouter>
         <Navigation />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/write" element={<StoryWriter onSaveStory={addStory} />} />
-          <Route path="/gallery" element={<StoryGallery stories={stories} />} />
+          <Route path="/" element={<Home progress={userProgress} />} />
+          <Route path="/lesson" element={<StoryLesson onComplete={() => updateProgress({ lessonCompleted: true })} />} />
+          <Route path="/write" element={<GuidedWriter progress={userProgress} onProgressUpdate={updateProgress} />} />
+          <Route path="/gallery" element={<StoryGallery stories={userProgress.completedStories} />} />
         </Routes>
         <Toaster />
       </BrowserRouter>
