@@ -37,7 +37,7 @@ const StoryLesson = ({ onComplete }) => {
 
   const handleComplete = () => {
     setCompletedSteps(prev => new Set([...prev, currentStep]));
-    onComplete();
+    onComplete({ lesson_completed: true });
     toast({
       title: "🎉 Lesson Complete!",
       description: "You're ready to start writing amazing stories! Click 'Start Writing' to begin.",
