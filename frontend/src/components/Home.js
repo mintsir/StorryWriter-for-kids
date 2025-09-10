@@ -65,14 +65,14 @@ const Home = ({ progress }) => {
           Your Story Learning Journey
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className={`border-2 ${progress.lessonCompleted ? 'border-green-300 bg-green-50' : 'border-indigo-300'}`}>
+          <Card className={`border-2 ${progress.lesson_completed ? 'border-green-300 bg-green-50' : 'border-indigo-300'}`}>
             <CardHeader className="text-center">
               <div className="flex justify-center mb-2">
-                <GraduationCap className={`h-12 w-12 ${progress.lessonCompleted ? 'text-green-600' : 'text-indigo-600'}`} />
+                <GraduationCap className={`h-12 w-12 ${progress.lesson_completed ? 'text-green-600' : 'text-indigo-600'}`} />
               </div>
               <CardTitle className="text-xl">
                 1. Learn Story Structure
-                {progress.lessonCompleted && <Badge className="ml-2 bg-green-100 text-green-800">✓ Complete</Badge>}
+                {progress.lesson_completed && <Badge className="ml-2 bg-green-100 text-green-800">✓ Complete</Badge>}
               </CardTitle>
               <CardDescription>
                 Discover the 3 parts every great story needs
