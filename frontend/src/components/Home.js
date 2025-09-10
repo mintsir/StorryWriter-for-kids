@@ -104,10 +104,10 @@ const Home = ({ progress }) => {
               <Link to="/write">
                 <Button 
                   className="w-full" 
-                  disabled={!progress.lessonCompleted}
-                  variant={progress.lessonCompleted ? 'default' : 'outline'}
+                  disabled={!progress.lesson_completed}
+                  variant={progress.lesson_completed ? 'default' : 'outline'}
                 >
-                  {progress.lessonCompleted ? 'Start Writing' : 'Complete Lesson First'}
+                  {progress.lesson_completed ? 'Start Writing' : 'Complete Lesson First'}
                 </Button>
               </Link>
             </CardContent>
