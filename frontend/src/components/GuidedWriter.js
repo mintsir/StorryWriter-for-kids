@@ -88,7 +88,7 @@ const GuidedWriter = ({ progress, onStoryCreate }) => {
     return starters.conclusion[0];
   };
 
-  const saveCompleteStory = () => {
+  const saveCompleteStory = async () => {
     if (!storyTitle.trim()) {
       toast({
         title: "Add a title!",
@@ -107,31 +107,37 @@ const GuidedWriter = ({ progress, onStoryCreate }) => {
       return;
     }
 
-    const completeStory = {
-      id: Date.now(),
-      title: storyTitle,
-      category: selectedCategory.name,
-      introduction: storyParts[0],
-      middle: storyParts[1],
-      conclusion: storyParts[2],
-      dateCompleted: new Date().toISOString().split('T')[0],
-      wordCount: storyParts.join(' ').trim().split(/\s+/).length
-    };
+    try {
+      setSaving(true);
+      
+      const storyData = {
+        title: storyTitle.trim(),
+        category: selectedCategory.name,
+        introduction: storyParts[0].trim(),
+        middle: storyParts[1].trim(),
+        conclusion: storyParts[2].trim(),
+        date_completed: new Date().toISOString().split('T')[0],
+        word_count: storyParts.join(' ').trim().split(/\s+/).length
+      };
 
-    onProgressUpdate({
-      completedStories: [...(progress.completedStories || []), completeStory]
-    });
+      await onStoryCreate(storyData);
 
-    toast({
-      title: "🎉 Story Complete!",
-      description: `"${storyTitle}" has been saved to your collection!`,
-    });
+      toast({
+        title: "🎉 Story Complete!",
+        description: `"${storyTitle}" has been saved to your collection!`,
+      });
 
-    // Reset for new story
-    setStoryTitle('');
-    setStoryParts(['', '', '']);
-    setCurrentStep(0);
-    setSelectedCategory(null);
+      // Reset for new story
+      setStoryTitle('');
+      setStoryParts(['', '', '']);
+      setCurrentStep(0);
+      setSelectedCategory(null);
+      
+    } catch (error) {
+      // Error handling is done in App.js
+    } finally {
+      setSaving(false);
+    }
   };
 
   const toggleHint = (step) => {
