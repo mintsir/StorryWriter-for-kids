@@ -1,51 +1,29 @@
-import { useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
-
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
-
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
-  return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
-  );
-};
+import Home from "./components/Home";
+import StoryWriter from "./components/StoryWriter";
+import StoryGallery from "./components/StoryGallery";
+import Navigation from "./components/Navigation";
+import { Toaster } from "./components/ui/toaster";
 
 function App() {
+  const [stories, setStories] = useState([]);
+  
+  const addStory = (story) => {
+    setStories(prev => [...prev, { ...story, id: Date.now() }]);
+  };
+
   return (
-    <div className="App">
+    <div className="App min-h-screen bg-gradient-to-br from-sky-50 via-white to-indigo-50">
       <BrowserRouter>
+        <Navigation />
         <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/write" element={<StoryWriter onSaveStory={addStory} />} />
+          <Route path="/gallery" element={<StoryGallery stories={stories} />} />
         </Routes>
+        <Toaster />
       </BrowserRouter>
     </div>
   );
