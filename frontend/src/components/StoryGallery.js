@@ -48,6 +48,75 @@ const StoryGallery = ({ stories }) => {
     });
   };
 
+  const getStoryPreview = (story) => {
+    if (story.introduction) {
+      return story.introduction.substring(0, 120) + '...';
+    }
+    return (story.content || '').substring(0, 120) + '...';
+  };
+
+  const getWordCount = (story) => {
+    if (story.wordCount) return story.wordCount;
+    if (story.introduction && story.middle && story.conclusion) {
+      return (story.introduction + ' ' + story.middle + ' ' + story.conclusion).trim().split(/\s+/).length;
+    }
+    return (story.content || '').trim().split(/\s+/).length;
+  };
+
+  const renderFullStory = (story) => (
+    <div className="space-y-6">
+      <div className="text-center">
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">"{story.title}"</h2>
+        <div className="flex items-center justify-center space-x-4 text-sm text-gray-500">
+          <Badge className={getCategoryColor(story.category)}>{story.category}</Badge>
+          <span>By {story.studentName || 'Young Author'}</span>
+          <span>{formatDate(story.dateCompleted)}</span>
+        </div>
+      </div>
+
+      {story.introduction ? (
+        // New structured format
+        <div className="space-y-6">
+          <div className="flex items-start space-x-3">
+            <PlayCircle className="h-6 w-6 text-green-600 mt-1 flex-shrink-0" />
+            <div className="flex-1">
+              <h3 className="font-semibold text-green-800 mb-2">Introduction</h3>
+              <p className="text-gray-700 leading-relaxed">{story.introduction}</p>
+            </div>
+          </div>
+          
+          <div className="flex items-start space-x-3">
+            <Zap className="h-6 w-6 text-blue-600 mt-1 flex-shrink-0" />
+            <div className="flex-1">
+              <h3 className="font-semibold text-blue-800 mb-2">Main Story</h3>
+              <p className="text-gray-700 leading-relaxed">{story.middle}</p>
+            </div>
+          </div>
+          
+          <div className="flex items-start space-x-3">
+            <CheckCircle className="h-6 w-6 text-purple-600 mt-1 flex-shrink-0" />
+            <div className="flex-1">
+              <h3 className="font-semibold text-purple-800 mb-2">Conclusion</h3>
+              <p className="text-gray-700 leading-relaxed">{story.conclusion}</p>
+            </div>
+          </div>
+        </div>
+      ) : (
+        // Legacy format
+        <div className="bg-gray-50 p-6 rounded-lg">
+          <p className="text-gray-700 leading-relaxed">{story.content}</p>
+        </div>
+      )}
+
+      {story.teacherFeedback && (
+        <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+          <h4 className="font-semibold text-blue-800 mb-2">Teacher's Feedback</h4>
+          <p className="text-blue-700 text-sm">{story.teacherFeedback}</p>
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="text-center mb-8">
