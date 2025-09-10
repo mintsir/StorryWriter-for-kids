@@ -101,3 +101,113 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Test the Story Master API endpoints to ensure they work correctly"
+
+backend:
+  - task: "Root API endpoint"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+          agent: "testing"
+          comment: "Initial test failed - routes were not being registered due to router inclusion happening before route definitions"
+        - working: true
+          agent: "testing"
+          comment: "Fixed router registration order - moved app.include_router(api_router) after route definitions. GET /api/ now returns welcome message correctly"
+
+  - task: "User progress GET endpoint"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "GET /api/progress working correctly - creates and returns default progress if none exists with all required fields (lesson_completed, current_streak, stories_count, total_words, created_at, updated_at)"
+
+  - task: "User progress PUT endpoint"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "PUT /api/progress working correctly - successfully updates progress with lesson_completed: true and current_streak: 5, returns updated progress with proper timestamps"
+
+  - task: "Story creation POST endpoint"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "POST /api/stories working correctly - successfully creates story with all required fields (title, category, introduction, middle, conclusion, word_count, date_completed) and returns created story with _id"
+
+  - task: "Story retrieval GET endpoints"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Both GET /api/stories and GET /api/stories/{story_id} working correctly - returns all stories as array and specific story by ID respectively"
+
+  - task: "Progress auto-update on story creation"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Progress auto-update working correctly - stories_count and total_words are automatically incremented when new stories are created"
+
+  - task: "API error handling"
+    implemented: true
+    working: true
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Error handling working correctly - returns 422 for missing required fields, 400 for empty required fields, and 400 for invalid story IDs"
+
+frontend:
+  # No frontend testing requested
+
+metadata:
+  created_by: "testing_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false
+
+test_plan:
+  current_focus:
+    - "All backend API endpoints tested and working"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+    - agent: "testing"
+      message: "Completed comprehensive testing of Story Master API endpoints. Fixed critical router registration issue where routes were not being registered due to app.include_router() being called before route definitions. All 8 test scenarios now pass: root endpoint, progress GET/PUT, story creation/retrieval, progress auto-update, and error handling. Backend API is fully functional."
