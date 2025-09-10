@@ -56,7 +56,8 @@ const StoryGallery = ({ stories }) => {
   };
 
   const getWordCount = (story) => {
-    if (story.wordCount) return story.wordCount;
+    if (story.word_count) return story.word_count;
+    if (story.wordCount) return story.wordCount; // Legacy support
     if (story.introduction && story.middle && story.conclusion) {
       return (story.introduction + ' ' + story.middle + ' ' + story.conclusion).trim().split(/\s+/).length;
     }
