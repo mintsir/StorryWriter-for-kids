@@ -241,7 +241,7 @@ const StoryGallery = ({ stories }) => {
             </div>
             <div className="bg-white rounded-lg p-4 shadow-sm">
               <div className="text-2xl font-bold text-purple-600">
-                {allStories.reduce((total, story) => total + story.wordCount, 0)}
+                {allStories.reduce((total, story) => total + getWordCount(story), 0)}
               </div>
               <div className="text-sm text-gray-600">Total Words</div>
             </div>
