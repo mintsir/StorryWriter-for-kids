@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, HTTPException
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -6,9 +6,9 @@ import os
 import logging
 from pathlib import Path
 from pydantic import BaseModel, Field
-from typing import List
-import uuid
+from typing import List, Optional
 from datetime import datetime
+from bson import ObjectId
 
 
 ROOT_DIR = Path(__file__).parent
@@ -27,30 +27,42 @@ api_router = APIRouter(prefix="/api")
 
 
 # Define Models
-class StatusCheck(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    client_name: str
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
+class UserProgress(BaseModel):
+    lesson_completed: bool = False
+    current_streak: int = 0
+    stories_count: int = 0
+    total_words: int = 0
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
 
-class StatusCheckCreate(BaseModel):
-    client_name: str
+class UserProgressUpdate(BaseModel):
+    lesson_completed: Optional[bool] = None
+    current_streak: Optional[int] = None
+    stories_count: Optional[int] = None
+    total_words: Optional[int] = None
 
-# Add your routes to the router instead of directly to app
-@api_router.get("/")
-async def root():
-    return {"message": "Hello World"}
+class Story(BaseModel):
+    title: str
+    category: str
+    introduction: str
+    middle: str
+    conclusion: str
+    word_count: int
+    date_completed: str
+    student_name: Optional[str] = None
+    teacher_feedback: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
 
-@api_router.post("/status", response_model=StatusCheck)
-async def create_status_check(input: StatusCheckCreate):
-    status_dict = input.dict()
-    status_obj = StatusCheck(**status_dict)
-    _ = await db.status_checks.insert_one(status_obj.dict())
-    return status_obj
-
-@api_router.get("/status", response_model=List[StatusCheck])
-async def get_status_checks():
-    status_checks = await db.status_checks.find().to_list(1000)
-    return [StatusCheck(**status_check) for status_check in status_checks]
+class StoryCreate(BaseModel):
+    title: str
+    category: str
+    introduction: str
+    middle: str
+    conclusion: str
+    word_count: int
+    date_completed: str
+    student_name: Optional[str] = None
 
 # Include the router in the main app
 app.include_router(api_router)
