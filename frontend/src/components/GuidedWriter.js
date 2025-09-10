@@ -340,9 +340,9 @@ const GuidedWriter = ({ progress, onStoryCreate }) => {
                   Next: {stepNames[currentStep + 1]} <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               ) : (
-                <Button onClick={saveCompleteStory} className="bg-green-600 hover:bg-green-700">
+                <Button onClick={saveCompleteStory} className="bg-green-600 hover:bg-green-700" disabled={saving}>
                   <Save className="mr-2 h-4 w-4" />
-                  Save Complete Story
+                  {saving ? 'Saving...' : 'Save Complete Story'}
                 </Button>
               )}
             </div>
