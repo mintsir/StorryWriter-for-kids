@@ -286,3 +286,5 @@ test_plan:
 agent_communication:
     - agent: "testing"
       message: "Completed comprehensive testing of Story Master API endpoints. Fixed critical router registration issue where routes were not being registered due to app.include_router() being called before route definitions. All 8 test scenarios now pass: root endpoint, progress GET/PUT, story creation/retrieval, progress auto-update, and error handling. Backend API is fully functional."
+    - agent: "testing"
+      message: "Updated test plan to include comprehensive frontend testing. Will now test complete Story Master educational app functionality end-to-end including: home page & navigation, story structure lesson, guided writing process, story gallery, backend integration, and educational flow. All frontend tasks marked for testing with high priority."
