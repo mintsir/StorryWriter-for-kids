@@ -273,9 +273,14 @@ metadata:
 
 test_plan:
   current_focus:
-    - "All backend API endpoints tested and working"
+    - "Home page rendering and navigation"
+    - "Story structure lesson functionality"
+    - "Guided story writing process"
+    - "Story gallery functionality"
+    - "Frontend-backend integration"
+    - "Educational flow and gating mechanism"
   stuck_tasks: []
-  test_all: false
+  test_all: true
   test_priority: "high_first"
 
 agent_communication:
