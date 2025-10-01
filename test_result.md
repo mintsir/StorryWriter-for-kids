@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Test the Story Master API endpoints to ensure they work correctly"
+user_problem_statement: "Test the complete Story Master educational app functionality end-to-end including frontend UI, navigation, lesson flow, story writing process, gallery, and backend integration"
 
 backend:
   - task: "Root API endpoint"
