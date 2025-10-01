@@ -193,7 +193,77 @@ backend:
           comment: "Error handling working correctly - returns 422 for missing required fields, 400 for empty required fields, and 400 for invalid story IDs"
 
 frontend:
-  # No frontend testing requested
+  - task: "Home page rendering and navigation"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/Home.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Need to test home page rendering, Story Master branding, lesson completion status display, and navigation between pages"
+
+  - task: "Story structure lesson functionality"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/StoryLesson.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Need to test lesson page access, content display of 3-part structure, educational content, and lesson completion flow"
+
+  - task: "Guided story writing process"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/GuidedWriter.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Need to test category selection, step-by-step writing process (Introduction → Main Story → Conclusion), hint system, navigation between story parts, and story completion/saving"
+
+  - task: "Story gallery functionality"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/StoryGallery.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Need to test story display with proper structure, Read Full Story functionality, search and filter functionality, and writing statistics display"
+
+  - task: "Frontend-backend integration"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Need to test progress loading from API, story creation saving to database, statistics updates, and error handling for network issues"
+
+  - task: "Educational flow and gating mechanism"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/components/GuidedWriter.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Need to test that users must complete lesson before writing, all 3 story parts are required before saving, and app teaches proper story structure throughout"
 
 metadata:
   created_by: "testing_agent"
